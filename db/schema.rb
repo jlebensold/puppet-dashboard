@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -12,8 +13,6 @@
 
 ActiveRecord::Schema.define(:version => 20130418064011) do
 
-  postgres = ActiveRecord::Base.connection.adapter_name.downcase =~ /postgres/
-
   create_table "delayed_job_failures", :force => true do |t|
     t.string   "summary"
     t.text     "details"
@@ -26,8 +25,7 @@ ActiveRecord::Schema.define(:version => 20130418064011) do
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",                       :default => 0
     t.integer  "attempts",                       :default => 0
-    t.text     "handler",    :limit => 16777216			unless postgres
-    t.text     "handler"					if postgres
+    t.text     "handler",    :limit => 16777216
     t.text     "last_error"
     t.datetime "run_at"
     t.datetime "locked_at"
@@ -61,9 +59,9 @@ ActiveRecord::Schema.define(:version => 20130418064011) do
 
   create_table "node_classes", :force => true do |t|
     t.string   "name"
-    t.text     "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.text     "description"
   end
 
   create_table "node_group_class_memberships", :force => true do |t|
@@ -98,9 +96,9 @@ ActiveRecord::Schema.define(:version => 20130418064011) do
 
   create_table "node_groups", :force => true do |t|
     t.string   "name"
-    t.text     "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.text     "description"
   end
 
   create_table "nodes", :force => true do |t|
@@ -114,8 +112,6 @@ ActiveRecord::Schema.define(:version => 20130418064011) do
     t.boolean  "hidden",                 :default => false
     t.integer  "last_inspect_report_id"
   end
-
-  add_index "nodes", ["name"], :name => "uc_node_name", :unique => true
 
   create_table "old_reports", :force => true do |t|
     t.integer  "node_id"
@@ -136,18 +132,16 @@ ActiveRecord::Schema.define(:version => 20130418064011) do
     t.datetime "updated_at",         :null => false
   end
 
+  add_index "parameters", ["parameterable_type", "parameterable_id"], :name => "index_parameters_on_parameterable_type_and_parameterable_id"
+
   create_table "report_logs", :force => true do |t|
     t.integer  "report_id",                :null => false
     t.string   "level"
-    t.text     "message",   :limit => 255			unless postgres
-    t.text     "message"					if postgres
-    t.text     "source",    :limit => 255			unless postgres
-    t.text     "source"						if postgres
-    t.text     "tags",      :limit => 255			unless postgres
-    t.text     "tags"						if postgres
+    t.text     "message",   :limit => 255
+    t.text     "source",    :limit => 255
+    t.text     "tags",      :limit => 255
     t.datetime "time"
-    t.text     "file",      :limit => 255			unless postgres
-    t.text     "file"						if postgres
+    t.text     "file",      :limit => 255
     t.integer  "line"
   end
 
@@ -168,18 +162,14 @@ ActiveRecord::Schema.define(:version => 20130418064011) do
 
   create_table "resource_events", :force => true do |t|
     t.integer  "resource_status_id",                :null => false
-    t.text     "previous_value",     :limit => 255		unless postgres
-    t.text     "previous_value"					if postgres
-    t.text     "desired_value",      :limit => 255		unless postgres
-    t.text     "desired_value"					if postgres
-    t.text     "message",            :limit => 255		unless postgres
-    t.text     "message"					if postgres
+    t.text     "previous_value",     :limit => 255
+    t.text     "desired_value",      :limit => 255
+    t.text     "message",            :limit => 255
     t.string   "name"
     t.string   "property"
     t.string   "status"
     t.datetime "time"
-    t.text     "historical_value",   :limit => 255		unless postgres
-    t.text     "historical_value"				if postgres
+    t.text     "historical_value",   :limit => 255
     t.boolean  "audited"
   end
 
@@ -188,14 +178,11 @@ ActiveRecord::Schema.define(:version => 20130418064011) do
   create_table "resource_statuses", :force => true do |t|
     t.integer  "report_id",                                                       :null => false
     t.string   "resource_type"
-    t.text     "title",             :limit => 255		unless postgres
-    t.text     "title"						if postgres
+    t.text     "title",             :limit => 255
     t.decimal  "evaluation_time",                  :precision => 12, :scale => 6
-    t.text     "file",              :limit => 255		unless postgres
-    t.text     "file"						if postgres
+    t.text     "file",              :limit => 255
     t.integer  "line"
-    t.text     "tags",              :limit => 255		unless postgres
-    t.text     "tags"						if postgres
+    t.text     "tags",              :limit => 255
     t.datetime "time"
     t.integer  "change_count"
     t.integer  "out_of_sync_count"

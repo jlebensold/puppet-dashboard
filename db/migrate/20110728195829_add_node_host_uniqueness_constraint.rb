@@ -1,4 +1,5 @@
 class AddNodeHostUniquenessConstraint < ActiveRecord::Migration
+=begin
   def self.up
     execute <<-SQL
       ALTER TABLE nodes
@@ -12,4 +13,5 @@ class AddNodeHostUniquenessConstraint < ActiveRecord::Migration
         DROP INDEX uc_node_name
     SQL
   end
+=end
 end

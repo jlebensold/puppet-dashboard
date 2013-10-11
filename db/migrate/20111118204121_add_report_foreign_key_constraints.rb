@@ -6,8 +6,8 @@ class AddReportForeignKeyConstraints < ActiveRecord::Migration
     sql = Proc.new {|table, foreign_key, references|
       foreign_key ||= 'report_id'
       references  ||= 'reports'
-
-      execute "ALTER TABLE #{table} ADD CONSTRAINT fk_#{table}_#{foreign_key} FOREIGN KEY (#{foreign_key}) REFERENCES #{references}(id) ON DELETE CASCADE;"
+# JML
+#      execute "ALTER TABLE #{table} ADD CONSTRAINT fk_#{table}_#{foreign_key} FOREIGN KEY (#{foreign_key}) REFERENCES #{references}(id) ON DELETE CASCADE;"
     }
 
     sql.call('reports', 'node_id', 'nodes')
@@ -25,7 +25,8 @@ class AddReportForeignKeyConstraints < ActiveRecord::Migration
       :report_logs       => 'report_id',
       :metrics           => 'report_id',
     }.each do |table, column_name|
-      execute("ALTER TABLE #{table} DROP FOREIGN KEY fk_#{table}_#{column_name}")
+# JML
+#      execute("ALTER TABLE #{table} DROP FOREIGN KEY fk_#{table}_#{column_name}")
     end
   end
 end
