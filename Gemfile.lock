@@ -86,7 +86,6 @@ GEM
       metaclass (~> 0.0.1)
     multi_json (1.7.2)
     multipart-post (1.1.5)
-    mysql2 (0.3.11)
     nokogiri (1.5.9)
     oauth2 (0.8.0)
       faraday (~> 0.8)
@@ -107,7 +106,6 @@ GEM
     paper_trail (2.6.4)
       activerecord (~> 3.0)
       railties (~> 3.0)
-    pg (0.15.0)
     polyglot (0.3.3)
     rack (1.4.5)
     rack-cache (1.2)
@@ -205,11 +203,9 @@ DEPENDENCIES
   jquery-rails (~> 2.1)
   json_pure
   mocha (~> 0.13.3)
-  mysql2 (~> 0.3.11)
   omniauth (~> 1.1)
   omniauth-google-oauth2 (~> 0.1.13)
   paper_trail (~> 2.0)
-  pg (~> 0.15)
   rack
   rails (~> 3.2)
   rake (~> 0.9.3)
