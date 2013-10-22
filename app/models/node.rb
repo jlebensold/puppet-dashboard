@@ -111,9 +111,21 @@ class Node < ActiveRecord::Base
   def configuration
     classes = Hash.new
     node_classes_with_parameters.each do |node_class,parameters|
-      classes[node_class] = parameters
+      if parameters.empty?
+        classes[node_class] = parameters
+      else
+        parameters.each do |key,val|
+          nesting, parameter = key.split(':')
+          if parameter.present?
+            classes[node_class] = {} if classes[node_class].blank?
+            classes[node_class][nesting] = {} if classes[node_class][nesting].blank?
+            classes[node_class][nesting][parameter] = val
+          else  
+            classes[node_class] = parameters
+          end
+        end
+      end
     end
-
     {
       'name'       => name,
       'classes'    => classes,
