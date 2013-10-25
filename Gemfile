@@ -34,8 +34,9 @@ gem 'omniauth-google-oauth2', '~> 0.1.13'
 gem 'paper_trail', '~> 2.0'
 
 gem 'sqlite3'
+gem 'mocha', '~> 0.13.3'
+
 group :development, :test do
-  gem 'mocha', '~> 0.13.3', :require => false
   gem 'rspec-rails'
   gem 'factory_girl', '< 3.0' # supports ruby 1.8.7
   gem 'shoulda-matchers'
