@@ -1,0 +1,51 @@
+oss_jboss:
+  smtp_host: 'localhost'
+  pop3_host: 'pop3.officespacesoftware.com'
+  log4j_email: "officespace@${hostname}.officespacesoftware.com"
+  dir: '/opt/jboss'
+  pkg_name: 'JBoss-4.2.3.GA.zip'
+  ldap: false
+  path: '/opt/jboss/jboss-4.2.3.GA'
+
+mariadb_server:
+  service_name: "mysql"
+  root_password: "foo"
+
+mariadb_user:
+  'officespace:mysql_user': 'officespace'
+  'officespace:mysql_pass': 'officespace'
+  'officespace:mysql_database': 'officespace'
+  'officespace:grant': 'ALL'
+  'backup:mysql_user': 'backup'
+  'backup:mysql_pass': 'backup'
+  'backup:mysql_database': 'officespace'
+  'backup:grant': 'SELECT, LOCK TABLES'
+
+oss_apache:
+  default_vhost: false
+
+oss_apache::ssl_vhost:
+  'ssl:port': 443
+  'ssl:servername': '*.officespacesoftware.com'
+  'ssl:docroot': '/var/www/html'
+  'ssl:proxy_pass_path': '/'
+  'ssl:proxy_pass_url': 'ajp://localhost:8009/'
+  'ssl:ssl': true
+  'ssl:ssl_ca': '/etc/pki/godaddy/gd_bundle.crt'
+  'ssl:ssl_key': '/etc/pki/godaddy/officespace.key'
+  'ssl:ssl_cert': '/etc/pki/godaddy/officespacesoftware.com.crt'
+
+oss_apache::vhost:
+  'non-ssl:port': 80
+  'non-ssl:servername': '*.officespacesoftware.com'
+  'non-ssl:docroot': '/var/www/html'
+
+deploy_office_space:
+  pkg_name: 'OfficeSpace-CleanInstall.ross.zip'
+  war_name: 'OfficeSpace.war'
+  deploy_dir: '/opt/jboss/jboss-4.2.3.GA/server/default/deploy'
+
+deploy_backup_cron:
+  backup_server: 'officespace.com'
+  database: 'officespace'
+
