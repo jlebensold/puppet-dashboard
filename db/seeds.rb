@@ -20,11 +20,13 @@ mariadb_server
 deploy_office_space
 deploy_backup_cron
 )
+sso_classes = %w(deploy_single_sign_on)
 
 common_classes.each { |klass| NodeClass.create name: klass }
 vanilla_classes.each { |klass| NodeClass.create name: klass }
+sso_classes.each { |klass| NodeClass.create name: klass }
 
-%w(common oss_vanilla).each do |group|
+%w(common oss_vanilla single_sign_on).each do |group|
   NodeGroup.create name: group
 end
 
@@ -47,6 +49,20 @@ vanilla_group.save
 params_str = IO.readlines("#{Rails.root}/config/seed_params.yml").join()
 parameters = YAML.parse(params_str).to_ruby
 vanilla_group.node_classes.each do |nc|
+  next if parameters[nc.name] == nil
+  ngcm = nc.node_group_class_memberships.create node_class: nc
+  parameters[nc.name].each do |key,val|
+    Parameter.create parameterable_id: nc.id, parameterable_type: "NodeGroupClassMembership", key:key, value: val
+  end
+end
+
+sso_group = NodeGroup.find_by_name "single_sign_on"
+sso_classes.each do |sso|
+  sso_group.node_classes << NodeClass.find_by_name(sso)
+end
+params_str = IO.readlines("#{Rails.root}/config/sso_params.yml").join()
+parameters = YAML.parse(params_str).to_ruby
+sso_group.node_classes.each do |nc|
   next if parameters[nc.name] == nil
   ngcm = nc.node_group_class_memberships.create node_class: nc
   parameters[nc.name].each do |key,val|

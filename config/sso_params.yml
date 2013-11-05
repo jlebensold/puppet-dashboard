@@ -1,0 +1,11 @@
+deploy_single_sign_on:
+  flag_adfs_saml_enabled: true
+  flag_salt_enabled: true
+  pkg_name: 'SSO.ross.zip'
+  sso_vhost: 'ssoclient1'
+  war_name: 'sso.war'
+  deploy_dir: '/opt/jboss/jboss-4.2.3.GA/server/default/deploy'
+  client_adfs_url: 'https://dc1.officespacesoftware.com/adfs/ls'
+  client_sha1_thumbprint: 'ade58271e0dfb8258051c853247429c6e6cc8c7f'
+  oss_filter_private_key: 'eb083345d614c5ec3dbc78b795223fd48fb510ed59d33ec9'
+  oss_visual_directory: 'https://client1.officespacesoftware.com/vd/vd.jsp'
