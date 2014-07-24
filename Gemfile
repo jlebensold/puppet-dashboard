@@ -33,7 +33,6 @@ gem 'omniauth', '~> 1.1'
 gem 'omniauth-google-oauth2', '~> 0.1.13'
 gem 'paper_trail', '~> 2.0'
 
-gem 'sqlite3'
 gem 'mocha', '~> 0.13.3'
 gem 'mysql2'
 
