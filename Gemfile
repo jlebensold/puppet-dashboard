@@ -35,6 +35,7 @@ gem 'paper_trail', '~> 2.0'
 
 gem 'sqlite3'
 gem 'mocha', '~> 0.13.3'
+gem 'mysql2'
 
 group :development, :test do
   gem 'rspec-rails'
